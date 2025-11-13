@@ -35,18 +35,13 @@
 
 int main(){
     srand((unsigned) time(NULL));
-    Human stefan("Stefan",53);
-    Human kerstin("Kerstin",52);
-    Human oliver("Oliver",17);
 
-    std::vector<Human> gameCharacters;
-    gameCharacters.push_back(stefan);
-    gameCharacters.push_back(kerstin);
-    gameCharacters.push_back(oliver);
 
-    
-
-    srand((unsigned) time(NULL));
+    std::vector<GameCharacter *> gameCharacters;
+    gameCharacters.push_back(new Human("Stefan",53));
+    gameCharacters.push_back(new Human("Kerstin",52));
+    gameCharacters.push_back(new Human("Oliver",17));
+    gameCharacters.push_back(new Fly("Fluga"));
     //Game loop
     while(true){
         //Alla aktörer gör nåt 
@@ -54,15 +49,17 @@ int main(){
         // for(int i =0; i <=gameCharacters.size();i++){
         //     gameCharacters[i].act();
         // }
-        for(Human human : gameCharacters){
-            human.act();
+        for(GameCharacter *gameCharacter : gameCharacters){
+            gameCharacter->act();
             //std::cout << human.getAge(); 
         }
+       //
         
 
-        for(Human human : gameCharacters){
-            human.mightLevelUp();
+        for(GameCharacter *gameCharacter : gameCharacters){
+            gameCharacter->mightLevelUp();
         }
+        
         
         std::cout << "Press key for next turn " << std::endl;
         std::cin.get();
