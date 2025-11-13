@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include <stdexcept>
 // 1. OOP Grunder - tänk! Leta SUBSTANTIV - vi spånar webshop
 // ShoppingCart
 // Product
@@ -31,10 +32,33 @@ class Human {
 private:
     // internals
     int burpsInARow = 0;
+    int age;
 public:
     int level;
     std::string name;
-    int age;
+
+    //constructor parameters = mandatory
+    Human(std::string name, int age){
+        //name = nameNew;
+        this->name = name;
+        setAge(age);
+        level = 0;
+        //std::cout << "Hej" << std::endl;
+    }
+
+
+    // getter
+    int getAge(){
+        return age;
+    }
+
+    // setter
+    void setAge(int newAge){
+        if(newAge < 0 || newAge > 150){
+            throw std::invalid_argument("Argument for age is not valid");
+        }
+        age = newAge;
+    }
     // skriver metoder (funktioner) inuti klassen
     void act(){
         std::string actions[]={"eats","drinks","burps"};
@@ -59,36 +83,35 @@ public:
 
 int main(){
     srand((unsigned) time(NULL));
-    Human stefan;
-    stefan.name = "Stefan";
-    stefan.level = 0;
-    stefan.age = 53;
+    Human stefan("Stefan",53);
+    Human kerstin("Kerstin",52);
+    Human oliver("Oliver",17);
 
-    Human kerstin;
-    kerstin.name = "Kerstin";
-    kerstin.level = 0;
-    kerstin.age = 52;
+    std::vector<Human> gameCharacters;
+    gameCharacters.push_back(stefan);
+    gameCharacters.push_back(kerstin);
+    gameCharacters.push_back(oliver);
 
-    Human oliver;
-    oliver.name = "Oliver";
-    oliver.level = 0;
-    oliver.age = 17;
-   
     
 
     srand((unsigned) time(NULL));
     //Game loop
     while(true){
         //Alla aktörer gör nåt 
-        stefan.act();
-        kerstin.act();
-        oliver.act();
+       // C indexbaserade loopar
+        // for(int i =0; i <=gameCharacters.size();i++){
+        //     gameCharacters[i].act();
+        // }
+        for(Human human : gameCharacters){
+            human.act();
+            //std::cout << human.getAge(); 
+        }
+        
 
-        //Alla aktörer kanske levlar upp
-        stefan.mightLevelUp();
-        kerstin.mightLevelUp();
-        oliver.mightLevelUp();
-
+        for(Human human : gameCharacters){
+            human.mightLevelUp();
+        }
+        
         std::cout << "Press key for next turn " << std::endl;
         std::cin.get();
     }
