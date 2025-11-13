@@ -3,6 +3,7 @@
 #include <vector>
 #include <cstdlib>
 #include <stdexcept>
+#include "human.h"
 // 1. OOP Grunder - tänk! Leta SUBSTANTIV - vi spånar webshop
 // ShoppingCart
 // Product
@@ -24,60 +25,11 @@
 //                       - levla upp (om man rapar tre gånger på raken så levlar man upp en nivå)
 // 4. Inkapsling
 // 5. I vector...
+// 6. inklude CPP och H filer
 
 // 6. ÖVERKURS kl 13:00 arv
 //         det finns också ... FLUGOR
 
-class Human {
-private:
-    // internals
-    int burpsInARow = 0;
-    int age;
-public:
-    int level;
-    std::string name;
-
-    //constructor parameters = mandatory
-    Human(std::string name, int age){
-        //name = nameNew;
-        this->name = name;
-        setAge(age);
-        level = 0;
-        //std::cout << "Hej" << std::endl;
-    }
-
-
-    // getter
-    int getAge(){
-        return age;
-    }
-
-    // setter
-    void setAge(int newAge){
-        if(newAge < 0 || newAge > 150){
-            throw std::invalid_argument("Argument for age is not valid");
-        }
-        age = newAge;
-    }
-    // skriver metoder (funktioner) inuti klassen
-    void act(){
-        std::string actions[]={"eats","drinks","burps"};
-        int index = rand()%3;   
-        if(actions[index] == "burps"){
-            burpsInARow++;
-        }else{
-            burpsInARow = 0;
-        }
-        std::cout << name << " " << actions[index] << std::endl;
-    }
-    void mightLevelUp(){
-        if(burpsInARow == 3){
-            level++;
-            std::cout << name << " leveled up to " << level << std::endl;
-            burpsInARow = 0;
-        }
-    }
-};
 
 
 

@@ -3,7 +3,7 @@ PROG = main.exe
 # detta är h-filer
 DEPS=
 
-SRC = main.cpp
+SRC = main.cpp human.cpp
 CFLAGS = -g -std=c++17 -Wall -Werror
 LIBS = 
 CC=g++
